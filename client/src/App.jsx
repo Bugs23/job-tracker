@@ -26,11 +26,24 @@ export default function App() {
     setFormData({ company: "", role: "" });
   }
 
+  async function handleStatusUpdate(id, newStatus) {
+    const res = await axios.patch(`${API_URL}/${id}`, { status: newStatus });
+    setJobs(jobs.map((job) => (job._id === id ? res.data : job)));
+  }
+
   const jobElements = jobs.map((job) => (
     <li key={jobs._id}>
-      <span>
-        {job.company} — {job.role} ({job.status})
-      </span>
+      <span>{job.company}</span> — <span>{job.role}</span> (
+      <select
+        value={job.status}
+        onChange={(e) => handleStatusUpdate(job._id, e.target.value)}
+      >
+        <option value="applied">Applied</option>
+        <option value="interviewing">Interviewing</option>
+        <option value="rejected">Rejected</option>
+        <option value="offer">Offer</option>
+      </select>
+      )
     </li>
   ));
 
