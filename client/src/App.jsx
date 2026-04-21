@@ -31,6 +31,11 @@ export default function App() {
     setJobs(jobs.map((job) => (job._id === id ? res.data : job)));
   }
 
+  async function handleDelete(id) {
+    await axios.delete(`${API_URL}/${id}`);
+    setJobs(jobs.filter((job) => job._id !== id));
+  }
+
   const jobElements = jobs.map((job) => (
     <li key={jobs._id}>
       <span>{job.company}</span> — <span>{job.role}</span> (
@@ -43,7 +48,7 @@ export default function App() {
         <option value="rejected">Rejected</option>
         <option value="offer">Offer</option>
       </select>
-      )
+      )<button onClick={() => handleDelete(job._id)}>Delete</button>
     </li>
   ));
 
