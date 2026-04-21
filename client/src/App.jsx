@@ -6,6 +6,10 @@ const API_URL = "http://localhost:5000/api/jobs";
 export default function App() {
   const [jobs, setJobs] = useState([]);
   const [formData, setFormData] = useState({ company: "", role: "" });
+  const [filter, setFilter] = useState("all");
+
+  const filteredJobs =
+    filter === "all" ? jobs : jobs.filter((job) => job.status === filter);
 
   useEffect(() => {
     axios.get(API_URL).then((res) => setJobs(res.data));
@@ -15,6 +19,7 @@ export default function App() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
+  // Add new job
   async function handleSubmit(e) {
     e.preventDefault();
     if (!formData.company || !formData.role) return;
@@ -26,17 +31,20 @@ export default function App() {
     setFormData({ company: "", role: "" });
   }
 
+  // Status update
   async function handleStatusUpdate(id, newStatus) {
     const res = await axios.patch(`${API_URL}/${id}`, { status: newStatus });
     setJobs(jobs.map((job) => (job._id === id ? res.data : job)));
   }
 
+  // Delete job
   async function handleDelete(id) {
     await axios.delete(`${API_URL}/${id}`);
     setJobs(jobs.filter((job) => job._id !== id));
   }
 
-  const jobElements = jobs.map((job) => (
+  // Job Elements
+  const jobElements = filteredJobs.map((job) => (
     <li key={jobs._id}>
       <span>{job.company}</span> — <span>{job.role}</span> (
       <select
@@ -70,6 +78,13 @@ export default function App() {
         />
         <button type="submit">Add Job</button>
       </form>
+      <div>
+        <button onClick={() => setFilter("all")}>All</button>
+        <button onClick={() => setFilter("applied")}>Applied</button>
+        <button onClick={() => setFilter("interviewing")}>Interviewing</button>
+        <button onClick={() => setFilter("rejected")}>Rejected</button>
+        <button onClick={() => setFilter("offer")}>Offer</button>
+      </div>
       <ul>{jobElements}</ul>
     </div>
   );
