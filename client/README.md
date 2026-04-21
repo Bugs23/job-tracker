@@ -1,16 +1,66 @@
-# React + Vite
+# Job Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack MERN application for tracking job applications.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Frontend:** React, Vite, Tailwind CSS
+- **Backend:** Node.js, Express
+- **Database:** MongoDB Atlas, Mongoose
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Add job applications with company and role
+- Update application status (Applied, Interviewing, Rejected, Offer)
+- Delete applications
+- Filter by status
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js
+- MongoDB Atlas account
+
+### Installation
+
+1. Clone the repo
+
+```bash
+   git clone https://github.com/Bugs23/job-tracker.git
+```
+
+2. Install server dependencies
+
+```bash
+   cd server
+   npm install
+```
+
+3. Create `server/.env`
+
+```
+MONGODB_URI=your_mongodb_connection_string
+PORT=5000
+```
+
+4. Install client dependencies
+
+```bash
+   cd ../client
+   npm install
+```
+
+5. Start the server
+
+```bash
+   cd ../server
+   node index.js
+```
+
+6. Start the client
+
+```bash
+   cd ../client
+   npm run dev
+```
