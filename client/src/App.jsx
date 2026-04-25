@@ -109,7 +109,10 @@ export default function App() {
     <div className="min-h-screen bg-gray-900 p-8">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Job Tracker</h1>
-        <form onSubmit={handleSubmit} className="flex gap-3 mb-8">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col sm:flex-row gap-3 mb-8"
+        >
           <input
             name="company"
             placeholder="Company"
