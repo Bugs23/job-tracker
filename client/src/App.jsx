@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/jobs";
+const API_URL = "https://job-tracker-api-r9pa.onrender.com/api/jobs";
 
 export default function App() {
   const [jobs, setJobs] = useState([]);
